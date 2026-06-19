@@ -1,0 +1,32 @@
+class Solution {
+    public int getLength(int[] nums) {
+        int n = nums.length;
+        if (n == 0) return 0;
+        int maxLength = 1;
+        for (int i = 0; i < n; i++) {
+            Map<Integer, Integer> freqMap = new HashMap<>();
+            for (int j = i; j < n; j++) {
+                int val = nums[j];
+                freqMap.put(val, freqMap.getOrDefault(val, 0) + 1);
+                int distinctCount = freqMap.size();
+                if (distinctCount == 1) {
+                    maxLength = Math.max(maxLength, j - i + 1);
+                } else {
+                    Set<Integer> uniqueFreqs = new HashSet<>(freqMap.values());
+                    if (uniqueFreqs.size() == 2) {
+                        int minFreq = Integer.MAX_VALUE;
+                        int maxFreq = Integer.MIN_VALUE;
+                        for (int f : uniqueFreqs) {
+                            if (f < minFreq) minFreq = f;
+                            if (f > maxFreq) maxFreq = f;
+                        }
+                        if (maxFreq == 2 * minFreq) {
+                            maxLength = Math.max(maxLength, j - i + 1);
+                        }
+                    }
+                }
+            }
+        }
+        return maxLength;
+    }
+}
