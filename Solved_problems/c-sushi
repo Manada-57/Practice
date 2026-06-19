@@ -1,0 +1,30 @@
+import java.util.*;
+class Main{
+  public static void main(String[] args){
+    Scanner in=new Scanner(System.in);
+    int n,m;
+    n=in.nextInt();
+    m=in.nextInt();
+    int[] shari_weights=new int[n];
+    int[] neta_weights=new int[m];
+    for(int i=0;i<n;i++)
+    {
+      shari_weights[i]=in.nextInt();
+    }
+    for(int i=0;i<m;i++)
+    {
+      neta_weights[i]=in.nextInt();
+    }
+    ArrayList<Integer> list = new ArrayList<>();
+    for(int i=0;i<n;i++){
+      for(int j=0;j<m;j++){
+        if((shari_weights[i]*2)>=neta_weights[j] && !list.contains(neta_weights[j])){
+          list.add(neta_weights[j]);
+          break;
+        }
+      }
+    }
+    System.out.println(list.size());
+    in.close();
+  }
+}
